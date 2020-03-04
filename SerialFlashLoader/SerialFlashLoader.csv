@@ -1,0 +1,18 @@
+# system info SerialFlashLoader on 2019.03.31.11:00:07
+system_info:
+name,value
+DEVICE,5CGXFC5C6F27C6
+DEVICE_FAMILY,Cyclone V
+GENERATION_ID,1554022805
+#
+#
+# Files generated for SerialFlashLoader on 2019.03.31.11:00:07
+files:
+filepath,kind,attributes,module,is_top
+simulation/SerialFlashLoader.vhd,VHDL,,SerialFlashLoader,true
+simulation/submodules/altera_serial_flash_loader.v,VERILOG,,altera_serial_flash_loader,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+SerialFlashLoader.serial_flash_loader_0,altera_serial_flash_loader

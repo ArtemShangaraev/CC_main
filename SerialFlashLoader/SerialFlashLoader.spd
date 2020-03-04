@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="simulation/submodules/altera_serial_flash_loader.v"
+   type="VERILOG"
+   library="serial_flash_loader_0" />
+ <file path="simulation/SerialFlashLoader.vhd" type="VHDL" />
+ <topLevel name="SerialFlashLoader" />
+ <deviceFamily name="cyclonev" />
+</simPackage>

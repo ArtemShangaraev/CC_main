@@ -1,0 +1,6 @@
+	component SerialFlashLoader is
+		port (
+			noe_in : in std_logic := 'X'  -- noe
+		);
+	end component SerialFlashLoader;
+
