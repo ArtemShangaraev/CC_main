@@ -1,13 +1,14 @@
 -------------------------------------------------------------------------------
 -- Title      : XCVR wrapper
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : xcvr_wrapper.vhd
 -- Author     : Clive Seguna  <clive.seguna@cern.ch>
 -- Company    : University of Malta
 -- Created    : 2018-01-01
 -- Last update: 2020-02-23
--- Platform   : Cyclone V GX
+-- Platform   : Quartus Prime 18.1.0
+-- Target     : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: XCVR TX wrapper. RX has an input and can be used if needed.
@@ -20,6 +21,9 @@
 --  Date          Version   Author    Description
 --  2018-01-01    1.0       cseguna   Created
 --  2020-02-15    1.1       ashangar  Recreated to check compilation errors
+--  2020-02-20    1.2       ashangar  Removed XCVR RX.
+--                                    Reset and reconfiguration replaced by
+--                                    native Intel IP cores.
 -------------------------------------------------------------------------------
 
 Library IEEE;
