@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 -- Title      : LVDS wrapper
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : lvds_wrapper.vhd
 -- Author     : Clive Seguna  <clive.seguna@cern.ch>
