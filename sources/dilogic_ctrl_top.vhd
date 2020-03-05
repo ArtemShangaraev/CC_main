@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 -- Title      : Top level of Dilogic control
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : dilogic_ctrl_top.vhd
 -- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
@@ -12,7 +12,7 @@
 -------------------------------------------------------------------------------
 -- Description: Top level control of all 5-Dilogic cards.
 --              Provides the synchronization of four cards during parallel 
---              readout or correct multiplexing during thresholds loading.
+--              readout or thresholds loading.
 --              Generates correct FCODE.
 --              Convert 18-bit Dil word to 32-bit word for XCVR.
 -------------------------------------------------------------------------------
