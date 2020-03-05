@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
 -- Title      : LVDS decoder
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : lvds_decoder.vhd
 -- Author     : Artem Shangaraev
 -- Company    : NRC "Kurchatov institute" - IHEP
 -- Created    : 2018-01-01
--- Last update: 2020-02-27
+-- Last update: 2020-03-04
 -- Platform   : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
