@@ -7,7 +7,8 @@
 -- Company    : CERN
 -- Created    : 2020-02-13
 -- Last update: 2020-03-04
--- Platform   : Cyclone V GX
+-- Platform   : Quartus Prime 18.1.0
+-- Target     : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Multiplexer to send data from 4 Dilogic cards to XCVR.
