@@ -1,18 +1,17 @@
 -------------------------------------------------------------------------------
 -- Title      : Analog readout
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : analog_read.vhd
 -- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
 -- Company    : NRC "Kurchatov institute" - IHEP
 -- Created    : 2020-02-18
--- Last update: 2020-02-18
+-- Last update: 2020-03-04
 -- Platform   : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Read Analog signals from Gassiplex to Dilogic FIFO.
 --              Generates the full chain of signals for 3Gassiplex card.
---              To do: add stop-signal to break the readout and clear Dil FIFO.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
 -------------------------------------------------------------------------------
