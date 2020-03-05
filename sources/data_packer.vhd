@@ -1,17 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Data packer
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : data_packer.vhd
 -- Author     : Artem Shangaraev  <artem.shangaraev@cern.ch>
 -- Company    : CERN
 -- Created    : 2020-02-13
--- Last update: 2020-02-13
+-- Last update: 2020-03-04
 -- Platform   : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Multiplexer to send data from 4 Dilogic cards to XCVR.
---              Round-robin.
+--              There is a FIFO for each card.
+--              Round-robin reading of FIFOs.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
 -------------------------------------------------------------------------------
@@ -132,13 +133,6 @@ begin
 ------ This is a requirement of receiver side ---------------------------------
 
   s_data_out <= s_word_2 & s_word_1;
-
---  s_word_1  <= s_fifo_out(32*s_fifo_num+31 downto 32*s_fifo_num+16) 
---      when s_rdreq(s_fifo_num) = '1'
---      else x"C5BC";
---  s_word_2  <= s_fifo_out(32*s_fifo_num+15 downto 32*s_fifo_num) 
---      when s_rdreq(s_fifo_num) = '1'
---      else x"C5BC";
 
 -------------------------------------------------------------------------------
 ------ Choose FIFO to read from -----------------------------------------------
