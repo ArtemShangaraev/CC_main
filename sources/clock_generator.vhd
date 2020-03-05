@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 -- Title      : Clock generator
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : clock_generator.vhd
 -- Author     : Artem Shangaraev  <artem.shangaraev@cern.ch>
@@ -26,9 +26,9 @@ use IEEE.numeric_std.all;
 entity clock_generator is
   port (
     EXT_RST_i : in  std_logic;
-		RST_o     : out std_logic;
+    RST_o     : out std_logic;
     CLK_i     : in  std_logic;
-		CLK_o     : out std_logic
+    CLK_o     : out std_logic
   );
 end entity;
 
@@ -39,14 +39,14 @@ architecture rtl of clock_generator is
 -------------------------------------------------------------------------------
 ------ Intel IP ---------------------------------------------------------------
 
-	component main_pll is
-		port (
-			refclk   : in  std_logic;
-			rst      : in  std_logic;
-			outclk_0 : out std_logic;
-			locked   : out std_logic
-		);
-	end component main_pll;
+  component main_pll is
+    port (
+      refclk   : in  std_logic;
+      rst      : in  std_logic;
+      outclk_0 : out std_logic;
+      locked   : out std_logic
+  );
+  end component main_pll;
 
 -------------------------------------------------------------------------------
 ------ Signal declaration -----------------------------------------------------
