@@ -1,24 +1,28 @@
 -------------------------------------------------------------------------------
 -- Title      : System control
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : sys_ctrl.vhd
 -- Author     : Clive Seguna <clive.seguna@cern.ch>
 -- Company    : University of Malta
 -- Created    : 2018-01-01
--- Last update: 2020-02-15
+-- Last update: 2020-03-04
 -- Platform   : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: System control creates instructions for other fabric blocks
 --              depending on decoded LVDS commands.
+--              Converts signals from 50 MHz to 10 MHz clock domain.
+--              Provides control to fill internal RAM with thresholds.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
 -------------------------------------------------------------------------------
 --  Revisions  :
 --  Date          Version   Author    Description
---  2018-01-01    1.0       cseguna   Created
---  2020-02-15    1.1       ashangar  
+--  2019-01-01    1.0       cseguna   Created
+--  2020-02-05    1.1       ashangar  LVDS decoder added
+--  2020-02-27    1.2       ashangar  RAM control added
+--                                    LVDS commands replaced by simple pulses.
 -------------------------------------------------------------------------------
 
 Library IEEE;
