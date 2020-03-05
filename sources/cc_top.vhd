@@ -19,23 +19,8 @@
 -------------------------------------------------------------------------------
 --  Revisions  :
 --  Date          Version   Author    Description
---  2018-01-01    1.0       cseguna   Created
---  2020-02-14    1.20.1    ashangar  Added FIFO to provide XCVR TX
---                                    Removed unused signals
---  2020-02-14    1.20.1    ashangar  LVDSCtrl replaced by lvds_wrapper
---  2020-02-16    1.20.1    ashangar  SYSCtrl replaced by sys_ctrl
---                                    Reworked command decoding
---  2020-02-19    1.20.2    ashangar  Complete rearrangement of structure
---                                    New analog readout block.
---                                    New Dilogic FIFO readout block.
---                                    Temporary missing thresholds operations.
---  2020-02-20    1.20.2    ashangar  Assignment change!
---                                    Pin_B9 - Pin_K25 for C2_GX[1]
---                                    Similar i/o pins collected to logic 
---                                    vectors except databuses and addresses.
---  2020-02-23    1.20.3    ashangar  XCVR wrapper recreated with native
---                                    Transceiver Reset and Recongig IP.
---  2020-03-02    1.20.4    ashangar  Added buffers for all i/o
+--  2019-01-01    1.0       cseguna   Created as main_ctrl
+--  2020-03-02    1.20.4    ashangar  Main_ctrl moved to the next level entity.
 -------------------------------------------------------------------------------
 
 Library IEEE;
