@@ -1,28 +1,24 @@
 -------------------------------------------------------------------------------
 -- Title      : Main control
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : main_ctrl.vhd
 -- Author     : Clive Seguna  <clive.seguna@cern.ch>
 -- Company    : University of Malta
 -- Created    : 2018-01-01
--- Last update: 2020-02-14
+-- Last update: 2020-03-04
 -- Platform   : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Top level entity of the Column controller design
---              Provides control of Dilogic cards and FIFO for data taking.
---              Receives commands and data by LVDS. TX is also available.
---              Sends out data using GX transceivers. GX-RX is also available.
+-- Description: Main structural entity of the Column controller design.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
 -------------------------------------------------------------------------------
 --  Revisions  :
 --  Date          Version   Author    Description
---  2018-01-01    1.0       cseguna   Created
+--  2019-01-01    1.0       cseguna   Created
 --  2020-02-14    1.20.1    ashangar  Added FIFO to provide XCVR TX
 --                                    Removed unused signals
---                                    Cosmetics
 --  2020-02-14    1.20.1    ashangar  LVDSCtrl replaced by lvds_wrapper
 --  2020-02-16    1.20.1    ashangar  SYSCtrl replaced by sys_ctrl
 --                                    Reworked command decoding
@@ -32,6 +28,7 @@
 --                                    Temporary missing thresholds operations.
 --  2020-02-20    1.20.2    ashangar  Assignment change!
 --                                    Pin_B9 - Pin_K25 for C2_GX[1]
+--                                    Similar i/o pins collected to logic
 --  2020-02-23    1.20.3    ashangar  XCVR wrapper recreated with native
 --                                    Transceiver Reset and Recongig IP.
 --  2020-03-02    1.20.4    ashangar  Added buffers for all i/o
