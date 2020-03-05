@@ -6,7 +6,7 @@
 -- Author     : Clive Seguna  <clive.seguna@cern.ch>
 -- Company    : University of Malta
 -- Created    : 2018-01-01
--- Last update: 2020-02-23
+-- Last update: 2020-03-04
 -- Platform   : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
