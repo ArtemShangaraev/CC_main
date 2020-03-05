@@ -7,7 +7,8 @@
 -- Company    : CERN
 -- Created    : 2020-02-14
 -- Last update: 2020-02-14
--- Platform   : Cyclone V GX
+-- Platform   : Quartus Prime 18.1.0
+-- Target     : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: PLL with all necessary clocks for the design.
