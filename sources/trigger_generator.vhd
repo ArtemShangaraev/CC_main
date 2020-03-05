@@ -1,24 +1,24 @@
 -------------------------------------------------------------------------------
 -- Title      : Trigger_generator
--- Project    : ALICE ITS RUv1
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : trigger_generator.vhd
 -- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
 -- Company    : CERN / IHEP, Protvino
 -- Created    : 2019-07-18
 -- Last update: 2019-07-18
--- Platform   : Xilinx Vivado 2017.4
--- Target     : Kintex Ultrascale
+-- Platform   : Quartus Prime 18.1.0
+-- Target     : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Generate pulses with constant frequency (1 kHz).
---
+--              Optional entity for debug while LVDS doesn't work.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2019 CERN
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author    Description
--- 2019-07-18  1.0      ashangar  
+-- 2019-07-18  1.0      ashangar  Created
 -------------------------------------------------------------------------------
 
 library ieee;
