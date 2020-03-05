@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
 -- Title      : One Dilogic control
--- Project    :
+-- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : one_dilogic_ctrl.vhd
 -- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
 -- Company    : NRC "Kurchatov institute" - IHEP
 -- Created    : 2020-02-18
--- Last update: 2020-02-18
+-- Last update: 2020-03-04
 -- Platform   : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
