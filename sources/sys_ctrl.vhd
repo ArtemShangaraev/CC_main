@@ -256,12 +256,16 @@ begin
       s_channel_cnt <= (others => '0');
     elsif rising_edge(CLK50) then
       if s_is_data = '1' then
-        if s_channel_cnt < 64*5 - 1 then
-          s_channel_cnt <= s_channel_cnt + 1;
-          s_ram_addr    <= std_logic_vector(s_channel_cnt);
+        if s_ram_select < 3 then
+          if s_channel_cnt < 64*5-1 then
+            s_channel_cnt <= s_channel_cnt + 1;
+            s_ram_addr    <= std_logic_vector(s_channel_cnt);
+          else
+            s_channel_cnt <= (others => '0');
+            s_ram_select  <= s_ram_select + 1;
+          end if;
         else
-          s_channel_cnt <= (others => '0');
-          s_ram_select  <= s_ram_select + 1;
+          s_ram_select <= "00";
         end if;
       end if;
     end if;
