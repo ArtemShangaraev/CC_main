@@ -201,8 +201,8 @@ begin
         q         => s_thr_value
       );
   
-  s_thr_to_dil(17 downto 9) <= (others => '0');
-  s_thr_to_dil(8 downto 0)  <= s_thr_value;
+  s_thr_to_dil(17 downto 9) <= s_thr_value;
+  s_thr_to_dil(8 downto 0)  <= (others => '0');
   
     INST_DIL_CTRL: entity work.one_dilogic_ctrl
       port map (
