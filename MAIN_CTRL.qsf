@@ -71,7 +71,7 @@ set_global_assignment -name ADVANCED_PHYSICAL_OPTIMIZATION OFF
 set_location_assignment PIN_H12 -to CLK_IN_50MHZ -disable
 set_location_assignment PIN_R20 -to PLL_50MHZ_CLK
 set_global_assignment -name ENABLE_SIGNALTAP ON
-set_global_assignment -name USE_SIGNALTAP_FILE stp2_old.stp
+set_global_assignment -name USE_SIGNALTAP_FILE stp2_readout.stp
 set_location_assignment PIN_P21 -to ALMFULL[1]
 set_location_assignment PIN_V23 -to DIL_CLR[1]
 set_location_assignment PIN_R23 -to DIL_CLR[0]
@@ -248,57 +248,6 @@ set_global_assignment -name ALLOW_SHIFT_REGISTER_MERGING_ACROSS_HIERARCHIES ALWA
 set_global_assignment -name SAVE_DISK_SPACE OFF
 set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
-set_global_assignment -name SLD_NODE_CREATOR_ID 110 -section_id analog_read
-set_global_assignment -name SLD_NODE_ENTITY_NAME sld_signaltap -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_RAM_BLOCK_TYPE=AUTO" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_INFO=805334555" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_POWER_UP_TRIGGER=0" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_INVERSION_MASK_LENGTH=0" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ATTRIBUTE_MEM_MODE=OFF" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_FLOW_USE_GENERATED=0" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_BITS=11" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_BUFFER_FULL_STOP=1" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_CURRENT_RESOURCE_WIDTH=1" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INCREMENTAL_ROUTING=1" -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[5] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[13] -to analog_read|vcc -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL=1" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_PIPELINE=0" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_RAM_PIPELINE=0" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_COUNTER_PIPELINE=0" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=basic,1," -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL_PIPELINE=1" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ENABLE_ADVANCED_TRIGGER=0" -section_id analog_read
-set_global_assignment -name SLD_NODE_CREATOR_ID 110 -section_id digital_read
-set_global_assignment -name SLD_NODE_ENTITY_NAME sld_signaltap -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_RAM_BLOCK_TYPE=AUTO" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_INFO=805334556" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_POWER_UP_TRIGGER=0" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_INVERSION_MASK_LENGTH=0" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ATTRIBUTE_MEM_MODE=OFF" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_FLOW_USE_GENERATED=0" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_BITS=11" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_BUFFER_FULL_STOP=1" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_CURRENT_RESOURCE_WIDTH=1" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INCREMENTAL_ROUTING=1" -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[23] -to digital_read|vcc -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL=1" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_IN_ENABLED=1" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_PIPELINE=0" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_RAM_PIPELINE=0" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_COUNTER_PIPELINE=0" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL_PIPELINE=1" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[0] -to CH_ADDR_D1_N[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[1] -to CH_ADDR_D1_N[1] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[2] -to CH_ADDR_D1_N[2] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[3] -to CH_ADDR_D1_N[3] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[4] -to CH_ADDR_D1_N[4] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[5] -to CH_ADDR_D1_N[5] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[6] -to CLKD_N[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[7] -to CLK_ADC_N[0] -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[25] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[8] -to digital_read|vcc -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ENABLE_ADVANCED_TRIGGER=1" -section_id digital_read
 set_location_assignment PIN_AB19 -to DATA_BUS_D1[17]
 set_location_assignment PIN_AC19 -to DATA_BUS_D1[16]
 set_location_assignment PIN_AF19 -to DATA_BUS_D1[14]
@@ -317,75 +266,8 @@ set_location_assignment PIN_AF24 -to DATA_BUS_D1[2]
 set_location_assignment PIN_AE23 -to DATA_BUS_D1[1]
 set_location_assignment PIN_AE25 -to DATA_BUS_D1[0]
 set_location_assignment PIN_AE19 -to DATA_BUS_D1[15]
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[21] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[0] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[6] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[24] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[8] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[17] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[1] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[20] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[0] -to ENIN_N[0] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[1] -to ENOUT_N[0] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[2] -to ENOUT_N[1] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[3] -to ENOUT_N[2] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[4] -to ENOUT_N[3] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[5] -to ENOUT_N[4] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[0] -to ENIN_N[0] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[1] -to ENOUT_N[0] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[2] -to ENOUT_N[1] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[3] -to ENOUT_N[2] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[4] -to ENOUT_N[3] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[5] -to ENOUT_N[4] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[6] -to FCODE_C1[0] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[7] -to FCODE_C1[1] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[8] -to FCODE_C1[2] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[9] -to FCODE_C1[3] -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[3] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[4] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[10] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[11] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[12] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[15] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[24] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[25] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[28] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT trigger_in -to TRG_N[0] -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_DATA_BITS=31" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=8" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_BITS=31" -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[2] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[5] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[7] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[22] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[27] -to digital_read|vcc -section_id digital_read
-set_global_assignment -name SIGNALTAP_FILE stp2_old.stp
-set_global_assignment -name VHDL_FILE sources/XCVR_WRAPPER.vhd
-set_global_assignment -name VHDL_FILE sources/MAIN_CTRL.vhd
-set_global_assignment -name QSYS_FILE SerialFlashLoader.qsys
-set_global_assignment -name SDC_FILE sources/main_ctrl.sdc
-set_global_assignment -name VHDL_FILE sources/lvds_wrapper.vhd
-set_global_assignment -name VHDL_FILE sources/sys_ctrl.vhd
-set_global_assignment -name VHDL_FILE sources/analog_read.vhd
-set_global_assignment -name QIP_FILE ip/fifo_32x256/fifo_32x256.qip
-set_global_assignment -name VHDL_FILE sources/data_packer.vhd
-set_global_assignment -name VHDL_FILE sources/dilogic_ctrl_top.vhd
-set_global_assignment -name VHDL_FILE sources/one_dilogic_ctrl.vhd
-set_global_assignment -name QIP_FILE ip/lvds_rx/lvds_rx.qip
-set_global_assignment -name QIP_FILE ip/XCVR_TX/xcvr_tx.qip
-set_global_assignment -name SIP_FILE ip/XCVR_TX/xcvr_tx.sip
-set_global_assignment -name QIP_FILE ip/XCVR_TX/xcvr_rst_ctrl.qip
-set_global_assignment -name SIP_FILE ip/XCVR_TX/xcvr_rst_ctrl.sip
-set_global_assignment -name QIP_FILE ip/XCVR_TX/xcvr_recfg_ctrl.qip
-set_global_assignment -name SIP_FILE ip/XCVR_TX/xcvr_recfg_ctrl.sip
-set_global_assignment -name VHDL_FILE sources/lvds_decoder.vhd
-set_global_assignment -name QIP_FILE ip/ram_9x320/ram_9x320.qip
 set_location_assignment PIN_AB25 -to TEST_PIN
-set_global_assignment -name VHDL_FILE sources/trigger_generator.vhd
-set_global_assignment -name VHDL_FILE sources/cc_top.vhd
 set_location_assignment PIN_L8 -to clk_rx_in
-set_global_assignment -name QIP_FILE ip/main_PLL/main_PLL.qip
-set_global_assignment -name SIP_FILE ip/main_PLL/main_PLL.sip
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -929,66 +811,6 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to TEST_PIN
 set_instance_assignment -name SLEW_RATE 0 -to TEST_PIN
 set_instance_assignment -name IO_STANDARD LVDS -to clk_rx_in
 set_instance_assignment -name INPUT_TERMINATION OFF -to clk_rx_in
-set_global_assignment -name VHDL_FILE sources/clock_generator.vhd
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_clk -to "MAIN_CTRL:INST_MAIN_CTRL|CLK10" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SEGMENT_SIZE=128" -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[6] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[14] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[17] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[18] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[19] -to analog_read|gnd -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SAMPLE_DEPTH=128" -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_clk -to "MAIN_CTRL:INST_MAIN_CTRL|CLK10" -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[13] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[14] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[16] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[29] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[10] -to "MAIN_CTRL:INST_MAIN_CTRL|analog_read:INST_analog_read|start_i" -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[11] -to TRG_N[0] -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_DATA_BITS=13" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_BITS=13" -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[1] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[3] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[9] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[11] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[15] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[23] -to analog_read|gnd -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_IN_ENABLED=0" -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[6] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|trigger_i" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[7] -to TRG_N[0] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[10] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[0]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[11] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[10]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[12] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[11]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[13] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[12]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[14] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[13]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[15] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[14]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[16] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[15]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[17] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[16]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[18] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[17]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[19] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[1]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[20] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[2]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[21] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[3]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[22] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[4]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[23] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[5]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[24] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[6]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[25] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[7]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[26] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[8]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[27] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_TO_FABRIC_o[9]" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[28] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|trigger_i" -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[29] -to STRIN[0] -section_id digital_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[30] -to TRG_N[0] -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK=00000000000000000000000" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LENGTH=23" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SEGMENT_SIZE=512" -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[9] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[18] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[19] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[21] -to digital_read|gnd -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[26] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[30] -to digital_read|vcc -section_id digital_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[31] -to digital_read|gnd -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SAMPLE_DEPTH=512" -section_id digital_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_MAIN_CTRL_digital_read_1_b514," -section_id digital_read
 set_global_assignment -name POWER_USE_TA_VALUE 20
 set_global_assignment -name AUTO_ROM_RECOGNITION OFF
 set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
@@ -1017,31 +839,471 @@ set_instance_assignment -name SLEW_RATE 0 -to CLK_G[0]
 set_instance_assignment -name SLEW_RATE 0 -to CLK_G[1]
 set_instance_assignment -name SLEW_RATE 0 -to CLR_G[0]
 set_instance_assignment -name SLEW_RATE 0 -to CLR_G[1]
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[0] -to CLK_G[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[1] -to CLR_G[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[2] -to "MAIN_CTRL:INST_MAIN_CTRL|analog_read:INST_analog_read|start_i" -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[3] -to TRG_N[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[4] -to T_H[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[8] -to CLK_G[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[9] -to CLR_G[0] -section_id analog_read
-set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[12] -to T_H[0] -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=5" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK=000000000000000000000000000000000000" -section_id analog_read
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LENGTH=36" -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[0] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[2] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[4] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[7] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[10] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[12] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[16] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[20] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[22] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[26] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[27] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[28] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[29] -to analog_read|gnd -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[30] -to analog_read|vcc -section_id analog_read
-set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[31] -to analog_read|vcc -section_id analog_read
-set_global_assignment -name SLD_FILE db/stp2_old_auto_stripped.stp
+set_global_assignment -name SLD_NODE_CREATOR_ID 110 -section_id digital_read
+set_global_assignment -name SLD_NODE_ENTITY_NAME sld_signaltap -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT trigger_in -to TRG_N[0] -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_RAM_BLOCK_TYPE=AUTO" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_INFO=805334556" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_POWER_UP_TRIGGER=0" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK=00000000000000000000000" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LENGTH=23" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_INVERSION_MASK_LENGTH=0" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SEGMENT_SIZE=512" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ATTRIBUTE_MEM_MODE=OFF" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_FLOW_USE_GENERATED=0" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_BITS=11" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_BUFFER_FULL_STOP=1" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_CURRENT_RESOURCE_WIDTH=1" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INCREMENTAL_ROUTING=1" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL=1" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SAMPLE_DEPTH=512" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_IN_ENABLED=1" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_PIPELINE=0" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_RAM_PIPELINE=0" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_COUNTER_PIPELINE=0" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL_PIPELINE=1" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ENABLE_ADVANCED_TRIGGER=1" -section_id digital_read
+set_global_assignment -name POWER_USE_INPUT_FILES ON
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[18] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[11] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[19] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[30] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[20] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[24] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[2] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[13] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[15] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[16] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[23] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[25] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[0] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[9] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[17] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_clk -to "MAIN_CTRL:INST_MAIN_CTRL|CLK_SLOW" -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[8] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[10] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[12] -to digital_read|gnd -section_id digital_read
+set_global_assignment -name SDC_FILE sources/timing_constraints.sdc
+set_global_assignment -name SIGNALTAP_FILE stp2_readout.stp
+set_global_assignment -name VHDL_FILE sources/sys_ctrl_cdc.vhd
+set_global_assignment -name VHDL_FILE sources/XCVR_WRAPPER.vhd
+set_global_assignment -name VHDL_FILE sources/MAIN_CTRL.vhd
+set_global_assignment -name QSYS_FILE SerialFlashLoader.qsys
+set_global_assignment -name VHDL_FILE sources/lvds_wrapper.vhd
+set_global_assignment -name VHDL_FILE sources/sys_ctrl.vhd
+set_global_assignment -name VHDL_FILE sources/analog_read.vhd
+set_global_assignment -name QIP_FILE ip/fifo_32x256/fifo_32x256.qip
+set_global_assignment -name VHDL_FILE sources/data_packer.vhd
+set_global_assignment -name VHDL_FILE sources/dilogic_ctrl_top.vhd
+set_global_assignment -name VHDL_FILE sources/one_dilogic_ctrl.vhd
+set_global_assignment -name QIP_FILE ip/lvds_rx/lvds_rx.qip
+set_global_assignment -name QIP_FILE ip/XCVR_TX/xcvr_tx.qip
+set_global_assignment -name SIP_FILE ip/XCVR_TX/xcvr_tx.sip
+set_global_assignment -name QIP_FILE ip/XCVR_TX/xcvr_rst_ctrl.qip
+set_global_assignment -name SIP_FILE ip/XCVR_TX/xcvr_rst_ctrl.sip
+set_global_assignment -name QIP_FILE ip/XCVR_TX/xcvr_recfg_ctrl.qip
+set_global_assignment -name SIP_FILE ip/XCVR_TX/xcvr_recfg_ctrl.sip
+set_global_assignment -name VHDL_FILE sources/lvds_decoder.vhd
+set_global_assignment -name QIP_FILE ip/ram_9x320/ram_9x320.qip
+set_global_assignment -name VHDL_FILE sources/trigger_generator.vhd
+set_global_assignment -name VHDL_FILE sources/cc_top.vhd
+set_global_assignment -name QIP_FILE ip/main_PLL/main_PLL.qip
+set_global_assignment -name SIP_FILE ip/main_PLL/main_PLL.sip
+set_global_assignment -name VHDL_FILE sources/clock_generator.vhd
+set_global_assignment -name VHDL_FILE sources/dilogic_data_generator.vhd
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[0] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[1] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[2] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[3] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[4] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[5] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[6] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[7] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[8] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[9] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[18]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[10] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[19]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[11] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[12] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[20]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[13] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[21]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[14] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[22]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[15] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[23]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[16] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[24]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[17] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[25]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[18] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[26]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[19] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[27]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[20] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[28]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[21] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[29]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[22] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[23] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[30]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[24] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[31]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[25] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[26] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[27] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[28] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[29] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[30] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[31] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[32] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[33] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[34] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[35] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[36] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[37] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[38] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[39] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[40] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[41] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[42] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[43] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[44] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[45] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[46] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[47] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[48] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[49] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[50] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[51] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[52] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[53] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[54] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[55] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[56] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[57] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[58] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[59] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[60] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[61] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[62] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[63] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[64] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[65] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[66] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[67] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|STRIN_o" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[68] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[69] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[70] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[71] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[72] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[73] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[74] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[75] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[76] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[77] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[78] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[79] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[80] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[81] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[82] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[83] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[84] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[85] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[86] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[87] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[88] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[89] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[90] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[91] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[92] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[93] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[94] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[95] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[96] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[97] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[98] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[99] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[100] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[101] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[102] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[103] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[104] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[105] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[106] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[107] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[108] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[109] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[110] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[111] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[112] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[113] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[114] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[115] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[116] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[117] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[118] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[119] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[120] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[121] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[122] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|ENIN_N_o" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[123] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|trigger_i" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[0] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[1] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[2] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[3] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[4] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[5] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[6] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[7] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[8] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[9] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[18]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[10] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[19]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[11] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[12] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[20]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[13] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[21]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[14] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[22]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[15] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[23]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[16] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[24]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[17] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[25]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[18] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[26]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[19] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[27]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[20] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[28]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[21] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[29]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[22] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[23] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[30]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[24] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[31]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[25] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[26] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[27] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[28] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[29] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[30] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[31] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|CTRL_o[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[32] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[33] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[100]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[34] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[101]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[35] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[102]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[36] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[103]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[37] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[104]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[38] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[105]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[39] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[106]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[40] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[107]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[41] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[108]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[42] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[109]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[43] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[44] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[110]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[45] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[111]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[46] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[112]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[47] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[113]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[48] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[114]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[49] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[115]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[50] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[116]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[51] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[117]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[52] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[118]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[53] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[119]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[54] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[55] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[120]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[56] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[121]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[57] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[122]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[58] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[123]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[59] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[124]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[60] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[125]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[61] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[126]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[62] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[127]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[63] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[64] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[65] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[66] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[67] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[68] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[69] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[18]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[70] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[19]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[71] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[72] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[20]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[73] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[21]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[74] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[22]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[75] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[23]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[76] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[24]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[77] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[25]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[78] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[26]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[79] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[27]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[80] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[28]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[81] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[29]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[82] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[83] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[30]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[84] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[31]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[85] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[32]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[86] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[33]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[87] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[34]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[88] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[35]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[89] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[36]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[90] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[37]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[91] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[38]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[92] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[39]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[93] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[94] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[40]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[95] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[41]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[96] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[42]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[97] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[43]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[98] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[44]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[99] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[45]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[100] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[46]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[101] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[47]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[102] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[48]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[103] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[49]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[104] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[105] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[50]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[106] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[51]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[107] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[52]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[108] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[53]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[109] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[54]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[110] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[55]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[111] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[56]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[112] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[57]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[113] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[58]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[114] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[59]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[115] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[116] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[60]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[117] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[61]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[118] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[62]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[119] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[63]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[120] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[64]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[121] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[65]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[122] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[66]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[123] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[67]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[124] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[68]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[125] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[69]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[126] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[127] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[70]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[128] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[71]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[129] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[72]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[130] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[73]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[131] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[74]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[132] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[75]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[133] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[76]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[134] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[77]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[135] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[78]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[136] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[79]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[137] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[138] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[80]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[139] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[81]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[140] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[82]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[141] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[83]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[142] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[84]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[143] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[85]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[144] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[86]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[145] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[87]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[146] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[88]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[147] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[89]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[148] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[149] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[90]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[150] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[91]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[151] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[92]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[152] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[93]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[153] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[94]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[154] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[95]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[155] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[96]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[156] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[97]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[157] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[98]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[158] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[99]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[159] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATAOUT_o[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[160] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[161] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[162] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[163] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|DATA_RDY_o[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[164] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[165] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[166] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[167] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|FCODE_o[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[168] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[169] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[170] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[171] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|MACK_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[172] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[173] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[174] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[175] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[176] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[177] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[178] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[179] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[180] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[181] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[182] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[183] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[184] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[185] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[186] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[187] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[188] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[189] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[190] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[191] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[192] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[193] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[194] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|ENOUT_N_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[195] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:0:INST_DIL_CTRL|STRIN_o" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[196] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[197] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[198] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[199] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[200] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[201] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[202] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[203] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[204] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[205] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[206] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[207] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[208] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[209] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[210] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[211] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[212] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[213] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:1:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[214] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[215] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[216] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[217] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[218] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[219] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[220] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[221] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[222] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[223] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[224] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[225] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[226] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[227] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[228] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[229] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[230] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[231] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:2:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[232] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[0]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[233] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[10]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[234] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[11]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[235] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[12]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[236] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[13]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[237] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[14]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[238] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[15]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[239] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[16]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[240] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[17]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[241] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[1]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[242] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[2]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[243] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[3]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[244] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[4]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[245] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[5]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[246] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[6]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[247] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[7]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[248] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[8]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[249] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|DATA_FROM_DIL_i[9]" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[250] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|one_dilogic_ctrl:\\DIL_CTRL_GEN:3:INST_DIL_CTRL|ENIN_N_o" -section_id digital_read
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[251] -to "MAIN_CTRL:INST_MAIN_CTRL|dilogic_ctrl_top:INST_DIL_CTRL_TOP|trigger_i" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_DATA_BITS=252" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=124" -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_BITS=252" -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[1] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[3] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[4] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[5] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[6] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[7] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[14] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[21] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[22] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[26] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[27] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[28] -to digital_read|gnd -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[29] -to digital_read|vcc -section_id digital_read
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[31] -to digital_read|gnd -section_id digital_read
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_MAIN_CTRL_digital_read_1_3d3a," -section_id digital_read
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SLD_FILE db/stp2_readout_auto_stripped.stp

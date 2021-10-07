@@ -6,26 +6,23 @@
 -- Author     : Artem Shangaraev  <artem.shangaraev@cern.ch>
 -- Company    : CERN
 -- Created    : 2020-02-13
--- Last update: 2020-03-04
+-- Last update: 2021-04-14
 -- Platform   : Quartus Prime 18.1.0
 -- Target     : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Multiplexer to send data from 4 Dilogic cards to XCVR.
---              There is a FIFO for each card.
---              Round-robin reading of FIFOs.
+--              There is a FIFO for each card with different read/write clock.
+--              Round-robin reading of FIFOs with instant reading, 
+--              registering data and valid-acknowledge handshake process.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
--------------------------------------------------------------------------------
--- Revisions  :
--- Date         Version   Author    Description
--- 2020-02-13   1.0       ashangar  Created
 -------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity data_packer is
+entity data_packager is
   port (
     arst        : in  std_logic;
     
@@ -33,6 +30,7 @@ entity data_packer is
     CLK_DIL     : in  std_logic;
     DATA_i      : in  std_logic_vector(127 downto 0);
     DATA_RDY_i  : in  std_logic_vector(3 downto 0);
+    CTRL_i      : in  std_logic_vector(31 downto 0);
     
     -- XCVR interface, GTX parallel clock domain
     CLK_XCVR    : in  std_logic;
@@ -40,7 +38,7 @@ entity data_packer is
   );
 end entity;
 
-architecture rtl of data_packer is
+architecture rtl of data_packager is
 
 -------------------------------------------------------------------------------
 ---- Component declaration ----------------------------------------------------
@@ -62,21 +60,22 @@ architecture rtl of data_packer is
 -------------------------------------------------------------------------------
 ------ Signal declaration -----------------------------------------------------
   
-  signal s_data_out     : std_logic_vector (31 downto 0)  := (others => '0');
-  signal s_fifo_out     : std_logic_vector (127 downto 0) := (others => '0');
+  signal s_ctrl_in      : std_logic_vector (31 downto 0)  := (others => '1');
+  signal s_ctrl_reg     : std_logic_vector (31 downto 0)  := (others => '1');
+  signal s_ctrl_out     : std_logic_vector (31 downto 0)  := (others => '1');
+  
   signal s_data_in      : std_logic_vector (127 downto 0) := (others => '0');
   signal s_wrreq        : std_logic_vector (3 downto 0)   := x"0";
   signal s_wrfull       : std_logic_vector (3 downto 0)   := x"0";
   
   signal s_rdempty      : std_logic_vector (3 downto 0)   := x"0";
   signal s_rdreq        : std_logic_vector (3 downto 0)   := x"0";
-  signal s_rdreq_hold_0 : std_logic_vector (3 downto 0)   := x"0";
-  signal s_rdreq_hold_1 : std_logic_vector (3 downto 0)   := x"0";
-  signal s_rdreq_hold_2 : std_logic_vector (3 downto 0)   := x"0";
-  signal s_rdreq_hold_3 : std_logic_vector (3 downto 0)   := x"0";
+  signal s_fifo_out     : std_logic_vector (127 downto 0) := (others => '0');
+  signal s_data_valid   : std_logic_vector (3 downto 0)   := x"0";
+  signal s_valid_ack    : std_logic_vector (3 downto 0)   := x"0";
+  signal s_data_reg     : std_logic_vector (127 downto 0) := (others => '0');
+  signal s_data_out     : std_logic_vector (31 downto 0)  := (others => '0');
   
-  signal s_word_1       : std_logic_vector (15 downto 0)  := (others => '0');
-  signal s_word_2       : std_logic_vector (15 downto 0)  := (others => '0');
   signal s_fifo_num     : natural range 0 to 3 := 0;
 
 -------------------------------------------------------------------------------
@@ -87,11 +86,31 @@ begin
   DATA_o    <= s_data_out;
 
 -------------------------------------------------------------------------------
+------ CDC fo control words ---------------------------------------------------
+
+  CDC_CTRL_INST: process(CLK_XCVR, arst)
+  begin
+    if arst = '1' then
+      s_ctrl_in     <= (others => '1');
+      s_ctrl_reg    <= (others => '1');
+      s_ctrl_out    <= (others => '1');
+    elsif rising_edge(CLK_XCVR) then
+      s_ctrl_in     <= CTRL_i;
+      s_ctrl_reg    <= s_ctrl_in;
+      if s_ctrl_reg /= s_ctrl_in then
+        s_ctrl_out  <= s_ctrl_in;
+      else
+        s_ctrl_out  <= (others => '1');
+      end if;
+    end if;
+  end process CDC_CTRL_INST;
+  
+-------------------------------------------------------------------------------
 ------ Generate 4 FIFO for datapath -------------------------------------------
 
   INST_DATAPATH_FIFO_GEN : for i in 0 to 3 generate
   
-    s_wrreq(i) <= data_rdy_i(i) and not s_wrfull(i);
+    s_wrreq(i) <= DATA_RDY_i(i) and not s_wrfull(i);
     
     INST_xcvr_tx_fifo: fifo_32x256
       port map (
@@ -109,53 +128,63 @@ begin
     process (CLK_XCVR, arst)
     begin
       if (arst = '1') then
-        s_rdreq_hold_0(i) <= '0';
-        s_rdreq_hold_1(i) <= '0';
-        s_rdreq_hold_2(i) <= '0';
-        s_rdreq_hold_3(i) <= '0';
+        s_data_valid(i)                 <= '0';
+        s_rdreq(i)                      <= '0';
+        s_data_reg(32*i+31 downto 32*i) <= (others => '0');
       elsif falling_edge(CLK_XCVR) then
-        s_rdreq_hold_0(i) <= not s_rdempty(i);    -- real rdreq
-        s_rdreq_hold_1(i) <= s_rdreq_hold_0(i);   -- Hold while reading 4 FIFO
-        s_rdreq_hold_2(i) <= s_rdreq_hold_1(i);
-        s_rdreq_hold_3(i) <= s_rdreq_hold_2(i);
+        s_rdreq(i)                      <= not s_rdempty(i);
+        s_data_reg(32*i+31 downto 32*i) <= s_fifo_out(32*i+31 downto 32*i);
+        
+        if s_rdreq(i) = '1' then
+          s_data_valid(i)               <= '1';
+        elsif s_valid_ack(i) = '1' then
+          s_data_valid(i)               <= '0';
+        end if;
+        
       end if;
     end process;
   
-    s_rdreq(i) <= s_rdreq_hold_0(i)
-               or s_rdreq_hold_1(i)
-               or s_rdreq_hold_2(i)
-               or s_rdreq_hold_3(i);
-  
   end generate INST_DATAPATH_FIFO_GEN;
   
--------------------------------------------------------------------------------
------- Assemble data to send out ----------------------------------------------
------- Send bits [15..0] first, then [31..16] ---------------------------------
------- This is a requirement of receiver side ---------------------------------
-
-  s_data_out <= s_word_2 & s_word_1;
-
 -------------------------------------------------------------------------------
 ------ Choose FIFO to read from -----------------------------------------------
 
   DATA_MUX: process(CLK_XCVR, arst) 
   begin
     if (arst = '1') then
-      s_fifo_num    <= 0;
-      s_word_1  <= x"0000";
-      s_word_2  <= x"0000";
+      s_fifo_num      <= 0;
+      s_valid_ack     <= (others => '0');
+      s_data_out      <= (others => '0');
     elsif rising_edge(CLK_XCVR) then
-      if s_fifo_num < 3 then
-        s_fifo_num  <= s_fifo_num + 1;
+    
+      -- Control word has a priority
+      if s_ctrl_out /= x"FFFFFFFF" then
+        s_data_out    <= s_ctrl_out;
+        s_valid_ack   <= (others => '0');
       else
-        s_fifo_num  <= 0;
-      end if;
-      if s_rdreq(s_fifo_num) = '1' then
-        s_word_1  <= s_fifo_out(32*s_fifo_num+31 downto 32*s_fifo_num+16);
-        s_word_2  <= s_fifo_out(32*s_fifo_num+15 downto 32*s_fifo_num);
-      else
-        s_word_1  <= x"C5BC";
-        s_word_2  <= x"C5BC";
+        -- reset unused ACK signals
+        s_valid_ack   <= (others => '0');
+      
+        if s_data_valid(s_fifo_num) = '1' then
+          if s_fifo_num < 3 then
+            s_fifo_num  <= s_fifo_num + 1;
+          else
+            s_fifo_num  <= 0;
+          end if;
+          s_valid_ack(s_fifo_num) <= '1';
+          s_data_out              <= s_data_reg(32*s_fifo_num+31 downto 32*s_fifo_num);
+          
+        elsif s_data_valid /= "0000" then
+          if s_fifo_num < 3 then
+            s_fifo_num  <= s_fifo_num + 1;
+          else
+            s_fifo_num  <= 0;
+          end if;
+          s_data_out              <= x"C5C5C5BC";
+          
+        else
+          s_data_out              <= x"C5C5C5BC";
+        end if;
       end if;
     end if;
   end process;

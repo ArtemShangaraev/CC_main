@@ -6,21 +6,16 @@
 -- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
 -- Company    : NRC "Kurchatov institute" - IHEP
 -- Created    : 2020-02-18
--- Last update: 2020-03-04
+-- Last update: 2021-04-09
 -- Platform   : Quartus Prime 18.1.0
 -- Target     : Cyclone V GX
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Read FIFO of 5-Dilogic card.
+--              Reset FIFO or daisy chain.
 --              Load thresholds to the Dilogic memory or read it back.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
--------------------------------------------------------------------------------
---  Revisions  :
---  Date          Version   Author    Description
---  2020-02-18    1.0       ashangar  Created
---  2020-02-22    1.1       ashangar  FCODE control moved to top level
---                                    Single process FSM with external sync
 -------------------------------------------------------------------------------
 
 Library IEEE;
@@ -41,11 +36,7 @@ entity one_dilogic_ctrl is
     
     -- Dilogic connection
     RST_o             : out std_logic;
-    MACK_i            : in  std_logic;
-    ALMFULL_i         : in  std_logic;
     STRIN_o           : out std_logic;
-    EMPTY_N_i         : in  std_logic;
-    NO_ADATA_N_i      : in  std_logic;
     ENIN_N_o          : out std_logic;
     ENOUT_N_i         : in  std_logic_vector(4 downto 0);
     DIL_ID_o          : out std_logic_vector(2 downto 0);
@@ -66,17 +57,18 @@ architecture beh of one_dilogic_ctrl is
 -------------------------------------------------------------------------------
 ------ Signal declaration -----------------------------------------------------
 
---  constant C_TEST_MODE    : std_logic_vector (3 downto 0) := b"0000";
---  constant C_LOAD_ALMFULL : std_logic_vector (3 downto 0) := b"0001";
---  constant C_IDLE         : std_logic_vector (3 downto 0) := b"0010";
---  constant C_PATTERN_READ : std_logic_vector (3 downto 0) := b"1000";
---  constant C_PATTERN_DEL  : std_logic_vector (3 downto 0) := b"1001";
---  constant C_ANALOG_READ  : std_logic_vector (3 downto 0) := b"1010";
---  constant C_ANALOG_DEL   : std_logic_vector (3 downto 0) := b"1011";
---  constant C_RESET_FIFO   : std_logic_vector (3 downto 0) := b"1100";
---  constant C_RESET_CHAIN  : std_logic_vector (3 downto 0) := b"1101";
---  constant C_CONFIG_WRITE : std_logic_vector (3 downto 0) := b"1110";
---  constant C_CONFIG_READ  : std_logic_vector (3 downto 0) := b"1111";
+--  Reminder of FCODE:
+--  TEST_MODE    = b"0000";
+--  LOAD_ALMFULL = b"0001";
+--  IDLE         = b"0010";
+--  PATTERN_READ = b"1000";
+--  PATTERN_DEL  = b"1001";
+--  ANALOG_READ  = b"1010";
+--  ANALOG_DEL   = b"1011";
+--  RESET_FIFO   = b"1100";
+--  RESET_CHAIN  = b"1101";
+--  CONFIG_WRITE = b"1110";
+--  CONFIG_READ  = b"1111";
   
   type t_dil_fsm is (
     Reset,
@@ -119,7 +111,7 @@ begin
   
   DIL_ID_o          <= std_logic_vector(to_unsigned(i_dil_cnt,3));
   
-  DATA_RDY_o        <= '1' when st_dil = Wait_5_enout else '0';
+  DATA_RDY_o        <= ENOUT_N_i(4) when (st_dil = Wait_5_enout and FCODE_i /= x"E") else '0';
   
   RDY_o             <= '1' when  st_dil = Wait_sync else '0';
   
@@ -127,9 +119,12 @@ begin
 ------ Dilogic card FSM -------------------------------------------------------
 
   DILOGIC_FSM: process (CLK, arst)
+  
+  variable v_dil_cnt        : natural range 0 to 7 := 0;
+  
   begin
     if arst = '1' then
-      i_dil_cnt       <= 0;
+      v_dil_cnt       := 0;
       st_dil          <= Reset;
       
     elsif rising_edge(CLK) then
@@ -139,7 +134,7 @@ begin
           st_dil <= Idle;
           
         when Idle =>
-          i_dil_cnt   <= 0;
+          v_dil_cnt   := 0;
           case FCODE_i is
             when x"0" =>
               st_dil  <= Test_mode;
@@ -178,16 +173,17 @@ begin
         when Wait_5_enout =>
           if TIMEOUT_i   = '1' then 
             st_dil      <= Process_end;
-          elsif i_dil_cnt < 5 then
-            if ENOUT_N_i(i_dil_cnt) = '0' then
-              i_dil_cnt <= i_dil_cnt + 1;
+          elsif v_dil_cnt < 5 then
+            if ENOUT_N_i(v_dil_cnt) = '0' then
+              v_dil_cnt := v_dil_cnt + 1;
             end if;
           else
-            i_dil_cnt   <= 0;
+            v_dil_cnt   := 0;
             st_dil      <= Process_end;
           end if;
         
         when Process_end =>
+          v_dil_cnt     := 0;
           s_clk_ena     <= '0';
           st_dil        <= Wait_sync;
         
@@ -212,9 +208,12 @@ begin
           st_dil      <= Idle;
         
         when others =>
-          st_dil      <= Idle;
+          st_dil      <= Idle;    -- return to idle from any unexpected state
       end case;
     end if;
+    
+    i_dil_cnt   <= v_dil_cnt;
+    
   end process;
-
+  
 end architecture;

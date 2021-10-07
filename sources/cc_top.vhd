@@ -3,8 +3,10 @@
 -- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : cc_top.vhd
--- Author     : Clive Seguna  <clive.seguna@cern.ch>
+-- Author     : Clive Seguna <clive.seguna@cern.ch>
 -- Company    : University of Malta
+-- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
+-- Company    : NRC "Kurchatov institute" - IHEP
 -- Created    : 2018-01-01
 -- Last update: 2020-03-04
 -- Platform   : Quartus Prime 18.1.0
@@ -17,11 +19,6 @@
 --              Main control entity contains all logic.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
--------------------------------------------------------------------------------
---  Revisions  :
---  Date          Version   Author    Description
---  2019-01-01    1.0       cseguna   Created as main_ctrl
---  2020-03-02    1.20.4    ashangar  Main_ctrl moved to the next level entity.
 -------------------------------------------------------------------------------
 
 Library IEEE;
@@ -131,14 +128,16 @@ architecture structural of cc_top is
 ------ Signal declaration -----------------------------------------------------
 
 -- Reset
-  signal s_rst              : std_logic := '1';
+  signal s_int_rst          : std_logic := '1';
   signal s_ext_rst          : std_logic := '0';
 
 -- Clocks
-  signal CLK10              : std_logic := '1';
+  signal CLK_SLOW           : std_logic := '1';
+  signal CLK40_LVDS         : std_logic := '1';
+  signal s_clk_select       : std_logic := '0';
 
 -- I/O buffered signals
-  signal s_dil_clk_adc      : std_logic := '0';
+  signal s_clk_adc          : std_logic := '0';
   signal s_dil_clkd         : std_logic := '0';
   signal s_dil_clr          : std_logic := '0';
   signal s_trg_n            : std_logic := '0';
@@ -161,12 +160,13 @@ architecture structural of cc_top is
   signal s_gas_CLK          : std_logic := '0';
   signal s_gas_T_H          : std_logic := '0';
   
--- Bidirectional buses, 4x18 bit = 72
+-- Bidirectional buses, 4x18 bits = 72
   signal s_data_from_dil    : std_logic_vector (71 downto 0) := (others => '0');
   signal s_data_to_dil      : std_logic_vector (71 downto 0) := (others => '0');
   signal s_databus_oe       : std_logic_vector (71 downto 0) := (others => '0');
 
   signal s_test             : std_logic := '0';
+  
 -------------------------------------------------------------------------------
 ------ Architecture begin -----------------------------------------------------
 
@@ -174,10 +174,11 @@ begin
 
   INST_CLK_RST: entity work.clock_generator
     port map (
-      EXT_RST_i => s_ext_rst,
-      RST_o     => s_rst,
-      CLK_i     => PLL_50MHZ_CLK,
-      CLK_o     => CLK10
+      EXT_RST_i   => s_ext_rst,
+      RST_o       => s_int_rst,
+      CLK_LOCAL_i => PLL_50MHZ_CLK,
+      CLK_i       => CLK40_LVDS,
+      CLK_o       => CLK_SLOW
     );
 
 -------------------------------------------------------------------------------
@@ -192,7 +193,7 @@ begin
 ------ Main control -----------------------------------------------------------
   INST_MAIN_CTRL: entity work.main_ctrl
     port map (
-      ARST          => s_rst,
+      ARST          => s_int_rst,
       EXT_RST_o     => s_ext_rst,
       ------ LVDS ------
       LVDS_RX_i     => lvds_rx_in,
@@ -202,7 +203,9 @@ begin
       XCVR_REF_CLK  => REF_156MHZ,
       ------ CLK ------
       CLK50_PLL     => PLL_50MHZ_CLK,
-      CLK10         => CLK10,
+      CLK40_o       => CLK40_LVDS,
+      CLK_SLOW      => CLK_SLOW,
+      LVDS_RDY_o    => s_clk_select,
       ------ Dilogic ------
       SUB_COMP_o    => s_sub_cmp,
       DIL_CLR_o     => s_dil_clr,
@@ -213,8 +216,8 @@ begin
       ALMFULL_i     => s_almfull,
       EMPTY_N_i     => s_empty_n,
       NO_ADATA_N_i  => s_no_adata_n,
-      CLK_ADC_N_o   => s_dil_clk_adc,
-      CLKD_N_o      => s_dil_clkd,
+      CLK_A_N_o     => s_clk_adc,
+      CLK_D_N_o     => s_dil_clkd,
       ENIN_N_o      => s_enin_n,
       ENOUT_N_i     => s_enout_n,
       FCODE_o       => s_fcode_dil,
@@ -321,7 +324,7 @@ begin
       );
     INST_CLK_ADC: ALT_OUTBUF
       port map (
-        i => s_dil_clk_adc,
+        i => s_clk_adc,
         o => CLK_ADC_N(i)
       );
     INST_CLKD: ALT_OUTBUF
@@ -389,8 +392,8 @@ begin
       );
   end generate GEN_DIL_ADDR;
   
-  -- "10" means 3 Gassiplex per one Dilogic chip, 48 channels.
-  DIL_GX        <= b"1010"; -- "10" for D1 & D2; "10" for D3 & D4
+  -- b"10" means 3 Gassiplex per one Dilogic chip, 48 channels.
+  DIL_GX        <= b"1010"; -- b"10" for D1 & D2; b"10" for D3 & D4
 
 -------------------------------------------------------------------------------
 ------ 3-Gassiplex signals ----------------------------------------------------

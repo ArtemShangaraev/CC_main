@@ -16,10 +16,6 @@
 -------------------------------------------------------------------------------
 -- Copyright (c) 2019 CERN
 -------------------------------------------------------------------------------
--- Revisions  :
--- Date        Version  Author    Description
--- 2019-07-18  1.0      ashangar  Created
--------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -27,7 +23,7 @@ use ieee.numeric_std.all;
 
 entity trigger_generator is
   port (
-    CLK       : in  std_logic;    -- 10 MHz
+    CLK       : in  std_logic;    -- 8 MHz
     ARST      : in  std_logic;
 
     TRIGGER_o : out std_logic
@@ -38,7 +34,7 @@ architecture rtl of trigger_generator is
 
   signal s_cnt    : integer range 0 to 16000 := 0;
   
-  constant c_1k   : integer := 9999;
+  constant c_1k   : integer := 7999;
   
 begin
   

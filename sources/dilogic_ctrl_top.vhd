@@ -6,7 +6,7 @@
 -- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
 -- Company    : NRC "Kurchatov institute" - IHEP
 -- Created    : 2020-02-18
--- Last update: 2020-03-04
+-- Last update: 2021-04-07
 -- Platform   : Quartus Prime 18.1.0
 -- Target     : Cyclone V GX
 -- Standard   : VHDL'93/02
@@ -19,15 +19,6 @@
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
 -------------------------------------------------------------------------------
---  Revisions  :
---  Date          Version   Author    Description
---  2020-02-18    1.0       ashangar  Created
---  2020-02-22    1.1       ashangar  FSM generates FCODE, synchronises 4 cards
---                                    and creates datapath to fabric.
---                                    Thresholds loading temporary missing.
---  2020-02-27    1.2       ashangar  Added RAM for thresholds.
---                                    Replaced LVDS commands by simple pulses.
--------------------------------------------------------------------------------
 
 Library IEEE;
 Use IEEE.std_logic_1164.all;
@@ -37,8 +28,8 @@ entity dilogic_ctrl_top is
   port (
     arst            : in std_logic;
     
-    -- 50M clock domain
-    CLK50           : in std_logic;
+    -- LVDS clock domain
+    CLK_FAST        : in std_logic;
     
     -- RAM for thresholds
     ram_addr_i      : in  std_logic_vector(8 downto 0);
@@ -46,12 +37,15 @@ entity dilogic_ctrl_top is
     ram_wren_i      : in  std_logic;
     ram_select_i    : in  unsigned (1 downto 0);
     
-    -- 10M clock domain
-    CLK10           : in  std_logic;
+    -- FEE clock domain
+    CLK_SLOW        : in  std_logic;
     trigger_i       : in  std_logic;
-    started_rd_i    : in  std_logic;
+    data_ready_i    : in  std_logic;
+    accept_data_i   : in  std_logic;
+    reject_data_i   : in  std_logic;
     read_conf_i     : in  std_logic;
     write_conf_i    : in  std_logic;
+    check_status_i  : in  std_logic;
     
     -- Dilogic connection x4 cards
     RST_o           : out std_logic_vector(3 downto 0);
@@ -70,7 +64,8 @@ entity dilogic_ctrl_top is
     
     -- XCVR connection
     DATA_RDY_o      : out std_logic_vector(3 downto 0);
-    DATAOUT_o       : out std_logic_vector(127 downto 0)
+    DATAOUT_o       : out std_logic_vector(127 downto 0);
+    CTRL_o          : out std_logic_vector(31 downto 0)
   );
 end entity;
 
@@ -109,29 +104,38 @@ architecture beh of dilogic_ctrl_top is
   type t_readout_fsm is (
     Reset,
     Idle,
-    Wait_for_adc,
+    Waiting,
+    Wait_for_accept,
+    Wait_to_read,
+    Wait_to_clear,
     Analog_rd_start,
     Analog_rd_process,
     Rst_chain_start,
-    Rst_chain_delay,
-    Rst_chain_strin,
     Rst_chain_end,
+    Rst_fifo_start,
+    Rst_fifo_end,
     Conf_wr_start,
     Conf_wr_process,
     Conf_rd_start,
     Conf_rd_process
   );
   signal st_readout: t_readout_fsm := Reset;
-
+  
   signal s_data_from_dil  : std_logic_vector (71 downto 0) := (others => '0');
   signal s_data_to_dil    : std_logic_vector (71 downto 0) := (others => '0');
   signal s_data_to_fabric : std_logic_vector (71 downto 0) := (others => '0');
   signal s_data_rdy       : std_logic_vector (3 downto 0) := x"0";
+  signal s_ctrl_word      : std_logic_vector (31 downto 0) := (others => '1');
+  signal s_event_started  : std_logic := '0';
+  
+  signal s_data_reg       : std_logic_vector (71 downto 0) := (others => '0');
+  signal s_data_rdy_delay : std_logic_vector (3 downto 0) := x"0";
+  signal s_data_rdy_reg   : std_logic_vector (3 downto 0) := x"0";
   
   signal s_channel        : unsigned (8 downto 0) := (others => '0');
   signal s_ch_addr        : std_logic_vector (8 downto 0) := (others => '0');
 
-  signal s_rst_chain_cnt  : natural range 0 to 7 := 0;
+  signal s_rst_cnt        : natural range 0 to 7 := 0;
   signal s_timeout_cnt    : natural range 0 to 511 := 0;
   signal s_timeout        : std_logic := '0';
   signal s_dil_ena        : std_logic_vector (3 downto 0) := x"0";
@@ -148,8 +152,8 @@ architecture beh of dilogic_ctrl_top is
   
   signal s_fcode          : std_logic_vector (3 downto 0) := C_IDLE;
   
-  constant c_card_id      : std_logic_vector (11 downto 0) := 
-            "011" & "010" & "001" & "000";
+  constant c_card_id      : std_logic_vector (7 downto 0) := 
+            "11" & "10" & "01" & "00";
   signal s_dil_id         : std_logic_vector (11 downto 0) := (others => '0');
   signal s_sync_dil       : std_logic := '0';
   
@@ -165,15 +169,9 @@ begin
   DATA_TO_DIL_o   <= s_data_to_dil;
   
   s_mack          <= MACK_i;
-  s_almfull       <= ALMFULL_i;
-  s_empty_n       <= EMPTY_N_i;
-  s_no_adata_n    <= NO_ADATA_N_i;
   s_enout_n       <= ENOUT_N_i;
   s_data_from_dil <= DATA_FROM_DIL_i;
   
-  DATA_RDY_o      <= s_data_rdy;
-  
---  s_sync_dil      <= '1' when s_dil_rdy = x"F" else '0';
   s_sync_dil  <= s_dil_rdy(0) and s_dil_rdy(1) and s_dil_rdy(2) and s_dil_rdy(3);
   s_timeout   <= '1' when s_timeout_cnt = 1 else '0';
   
@@ -182,9 +180,9 @@ begin
 
   DIL_CTRL_GEN : for i in 0 to 3 generate
   
-  signal s_thr_value      : std_logic_vector (8 downto 0) := (others => '0');
-  signal s_thr_to_dil     : std_logic_vector (17 downto 0) := (others => '0');
-  signal s_wren           : std_logic := '0';
+    signal s_thr_value      : std_logic_vector (8 downto 0) := (others => '0');
+    signal s_thr_to_dil     : std_logic_vector (17 downto 0) := (others => '0');
+    signal s_wren           : std_logic := '0';
   
   begin
   
@@ -194,32 +192,28 @@ begin
       port map (
         data      => ram_data_i,
         rdaddress => s_ch_addr,
-        rdclock   => CLK10,
+        rdclock   => CLK_SLOW,
         wraddress => ram_addr_i,
-        wrclock   => CLK50,
+        wrclock   => CLK_FAST,
         wren      => s_wren,
         q         => s_thr_value
       );
   
-  s_thr_to_dil(17 downto 9) <= s_thr_value;
-  s_thr_to_dil(8 downto 0)  <= (others => '0');
+    s_thr_to_dil(17 downto 9) <= s_thr_value;
+    s_thr_to_dil(8 downto 0)  <= (others => '0');
   
     INST_DIL_CTRL: entity work.one_dilogic_ctrl
       port map (
         arst              => arst,
-        CLK               => CLK10,
+        CLK               => CLK_SLOW,
         FCODE_i           => s_fcode,
         RDY_o             => s_dil_rdy(i),
         SYNC_i            => s_sync_dil,
         TIMEOUT_i         => s_timeout,
         RST_o             => s_dil_rst(i),
-        MACK_i            => s_mack(i),
-        ALMFULL_i         => s_almfull(i),
-        EMPTY_N_i         => s_empty_n(i),
         STRIN_o           => s_strin(i),
         ENIN_N_o          => s_enin_n(i),
         ENOUT_N_i         => s_enout_n(5*i+4 downto 5*i),
-        NO_ADATA_N_i      => s_no_adata_n(i),
         DIL_ID_o          => s_dil_id(3*i+2 downto 3*i),
         DATA_FROM_DIL_i   => s_data_from_dil(18*i+17 downto 18*i),
         DATA_TO_DIL_o     => s_data_to_dil(18*i+17 downto 18*i),
@@ -228,72 +222,274 @@ begin
         DATA_RDY_o        => s_data_rdy(i)
       );
     
-    DATAOUT_o(32*i+31 downto 32*i) <= 
-          x"0" & 
-          s_fcode & 
-          c_card_id(3*i+2 downto 3*i) & 
-          s_dil_id(3*i+2 downto 3*i) & 
-          s_data_to_fabric(18*i+17 downto 18*i)
-      when s_data_rdy(i) = '1'
-      else x"5E000000" when s_sync_dil = '1'
-      else (others => '0');
       
-  s_dil_ena(i) <= '1' when st_readout = Conf_wr_start
+    s_dil_ena(i) <= '1' when st_readout = Conf_wr_start
                         or st_readout = Conf_wr_process
                       else '0';
     
   end generate DIL_CTRL_GEN;
+  
+-------------------------------------------------------------------------------
+------ Control words generation -----------------------------------------------
+
+  CTRL_ENABLE: process (CLK_SLOW, arst)
+  begin
+    if arst = '1' then
+      s_event_started <= '0';
+    elsif rising_edge(CLK_SLOW) then
+      if accept_data_i = '1' then
+        s_event_started <= '1';
+      elsif st_readout = Rst_chain_end then
+        s_event_started <= '0';
+      end if;
+    end if;
+  end process CTRL_ENABLE;
+  
+  CTRL_WORDS: process (CLK_SLOW, arst)
+  begin
+    if arst = '1' then
+      s_ctrl_word <= (others => '1');
+    elsif rising_edge(CLK_SLOW) then
+      if check_status_i = '1' then
+        s_ctrl_word <= x"C1FFFFFF";
+      elsif accept_data_i = '1' then
+        s_ctrl_word <= x"A1FFFFFF";
+      elsif st_readout = Rst_chain_end and s_event_started = '1'then
+        s_ctrl_word <= x"B1FFFFFF";
+      else
+        s_ctrl_word <= (others => '1');
+      end if;
+    end if;
+  end process CTRL_WORDS;
+  
+  CTRL_o  <= s_ctrl_word;
+  
+-------------------------------------------------------------------------------
+------ Output data from 5Dilogics. Data only ----------------------------------
+
+-- -- Don't use this part! It is special firmware for CC(23) with bad FEE
+--  DIL_DATA_OUT_0: process (CLK_SLOW, arst)
+--  
+--    variable v_enout_cnt: natural range 0 to 31 := 0;
+--  
+--  begin
+--    if arst = '1' then
+--      DATAOUT_o(31 downto 0)  <= (others => '0');
+--      DATA_RDY_o(0)   <= '0';
+--      v_enout_cnt     := 0;
+--    elsif rising_edge(CLK_SLOW) then
+--    
+--      v_enout_cnt := 5 * to_integer(unsigned(c_card_id(1 downto 0)))
+--                       + to_integer(unsigned(s_dil_id(2 downto 0)));
+--    
+--      s_data_rdy_reg(0)               <= s_data_rdy(0);
+--      s_data_rdy_delay(0)             <= s_data_rdy_reg(0);
+--      s_data_reg(17 downto 0) <= 
+--          s_data_to_fabric(17 downto 0);
+--      
+--      if s_dil_id(2 downto 0) = "000" or
+--         s_dil_id(2 downto 0) = "001" then
+--        DATA_RDY_o(0)   <= '0';
+--      else
+--        if s_data_rdy_delay(0) = '1' and s_data_rdy_reg(0) = '1' then
+--          DATA_RDY_o(0)   <= '1';
+--        else
+--          DATA_RDY_o(0)   <= '0';
+--        end if;
+--      end if;
+--      
+--      if s_data_rdy_reg(0) = '1' then
+----            DATAOUT_o(32*i+31 downto 32*i)  <= 
+----              x"0" & 
+----              s_fcode & 
+----              s_mack(i) &
+----              c_card_id(2*i+1 downto 2*i) & 
+----              s_dil_id(3*i+2 downto 3*i) & 
+----              s_data_reg(18*i+17 downto 18*i);
+--        if s_enout_n(v_enout_cnt) = '1' then
+--          DATAOUT_o(31 downto 0)  <= 
+--            x"0" & 
+--            s_fcode & 
+--            "0" & --s_mack(i) &
+--            c_card_id(1 downto 0) & 
+--            s_dil_id(2 downto 0) & 
+--            s_data_reg(17 downto 0);
+--        else
+--          DATAOUT_o(31 downto 0)  <= 
+--            x"0" & 
+--            s_fcode & 
+--            "1" & --s_mack(i) &
+--            c_card_id(1 downto 0) & 
+--            s_dil_id(2 downto 0) & 
+--            s_data_reg(17 downto 0);
+--        end if;
+--      else
+--        DATAOUT_o(31 downto 0)  <= (others => '0');
+--      end if;
+--    end if;
+--  end process;
+--  
+  DIL_DATA_GEN : for i in 0 to 3 generate
+    
+    DIL_DATA_OUT: process (CLK_SLOW, arst)
+    
+--      variable v_enout_cnt: natural range 0 to 31 := 0;
+    
+    begin
+      if arst = '1' then
+        DATAOUT_o(32*i+31 downto 32*i)  <= (others => '0');
+        DATA_RDY_o(i)   <= '0';
+--        v_enout_cnt     := 0;
+      elsif rising_edge(CLK_SLOW) then
+      
+--        v_enout_cnt := 5 * to_integer(unsigned(c_card_id(2*i+1 downto 2*i)))
+--                         + to_integer(unsigned(s_dil_id(3*i+2 downto 3*i)));
+      
+        s_data_rdy_reg(i)               <= s_data_rdy(i);
+        s_data_rdy_delay(i)             <= s_data_rdy_reg(i);
+        s_data_reg(18*i+17 downto 18*i) <= 
+            s_data_to_fabric(18*i+17 downto 18*i);
+        
+        if s_data_rdy_delay(i) = '1' and s_data_rdy_reg(i) = '1' then
+          DATA_RDY_o(i)   <= '1';
+        else
+          DATA_RDY_o(i)   <= '0';
+        end if;
+        
+        if s_data_rdy_reg(i) = '1' then
+            DATAOUT_o(32*i+31 downto 32*i)  <= 
+              x"0" & 
+              s_fcode & 
+              s_mack(i) &
+              c_card_id(2*i+1 downto 2*i) & 
+              s_dil_id(3*i+2 downto 3*i) & 
+              s_data_reg(18*i+17 downto 18*i);
+--          if s_enout_n(v_enout_cnt) = '1' then
+----            DATAOUT_o(32*i+31 downto 32*i)  <= 
+----              x"0" & 
+----              s_fcode & 
+----              s_mack(i) &
+----              c_card_id(2*i+1 downto 2*i) & 
+----              s_dil_id(3*i+2 downto 3*i) & 
+----              s_data_reg(18*i+17 downto 18*i);
+----            DATAOUT_o(32*i+31 downto 32*i)  <= 
+----              x"0" & 
+----              s_fcode & 
+----              "0" & --s_mack(i) &
+----              c_card_id(2*i+1 downto 2*i) & 
+----              s_dil_id(3*i+2 downto 3*i) & 
+----              "01" & x"47D1"; -- constant channel 20 with amplitude 2001
+--              DATAOUT_o(32*i+31 downto 32*i)  <= 
+--                x"0" & 
+--                s_fcode & 
+--                "0" & --s_mack(i) &
+--                c_card_id(2*i+1 downto 2*i) & 
+--                s_dil_id(3*i+2 downto 3*i) & 
+--                s_data_reg(18*i+17 downto 18*i); -- constant channel 20 with amplitude 2001
+--          else
+--            DATAOUT_o(32*i+31 downto 32*i)  <= 
+--              x"0" & 
+--              s_fcode & 
+--              "1" & --s_mack(i) &
+--              c_card_id(2*i+1 downto 2*i) & 
+--              s_dil_id(3*i+2 downto 3*i) & 
+--              s_data_reg(18*i+17 downto 18*i);
+--          end if;
+        else
+          DATAOUT_o(32*i+31 downto 32*i)  <= (others => '0');
+        end if;
+      end if;
+    end process;
+  
+  end generate DIL_DATA_GEN;
   
   s_ch_addr <= std_logic_vector(s_channel);
   
 -------------------------------------------------------------------------------
 ------ Readout control and sync FSM -------------------------------------------
 
-  READOUT_FSM: process (CLK10, arst)
+  READOUT_FSM: process (CLK_SLOW, arst)
   begin
     if arst = '1' then
-      s_fcode         <= C_IDLE;
-      s_channel       <= (others => '0');
-      s_timeout_cnt   <= 0;
-      s_rst_chain_cnt <= 0;
-      st_readout      <= Reset;
+      s_fcode       <= C_IDLE;
+      s_channel     <= (others => '0');
+      s_timeout_cnt <= 0;
+      s_rst_cnt     <= 0;
+      st_readout    <= Reset;
       
-    elsif rising_edge(CLK10) then
+    elsif rising_edge(CLK_SLOW) then
       
       case st_readout is
         when Reset =>
           st_readout      <= Conf_wr_start; -- Clear the threshold memory
           
         when Idle =>
-          s_fcode         <= C_IDLE;
-          s_channel       <= (others => '0');
-          s_timeout_cnt   <= 0;
-          s_rst_chain_cnt <= 0;
+          s_fcode       <= C_IDLE;
+          s_channel     <= (others => '0');
+          s_timeout_cnt <= 0;
+          s_rst_cnt     <= 0;
           if write_conf_i = '1' then
-            st_readout    <= Conf_wr_start;
+            st_readout  <= Conf_wr_start;
           elsif read_conf_i = '1' then
-            st_readout    <= Conf_rd_start;
+            st_readout  <= Conf_rd_start;
           elsif trigger_i = '1' then
-            st_readout    <= Wait_for_adc;
+            st_readout  <= Waiting;
           else
-            st_readout    <= Idle;
+            st_readout  <= Idle;
           end if;
           
 -------------------------------------------------------------------------------
------- Analog read subFSM -----------------------------------------------------
+------ Waiting data and decision subFSM ---------------------------------------
 
-        when Wait_for_adc =>
-          if started_rd_i = '1' then
+        when Waiting =>
+          if data_ready_i = '1' then
+            if accept_data_i = '1' then
+              st_readout  <= Analog_rd_start;
+            elsif reject_data_i = '1' then
+              s_fcode     <= C_RESET_FIFO;
+              st_readout  <= Rst_fifo_start;
+            else
+              st_readout  <= Wait_for_accept;
+            end if;
+          elsif accept_data_i = '1' then
+            st_readout    <= Wait_to_read;
+          elsif reject_data_i = '1' then
+            st_readout    <= Wait_to_clear;
+          else
+            st_readout    <= Waiting;
+          end if;
+        
+        when Wait_for_accept =>
+          if accept_data_i = '1' then
+            st_readout    <= Analog_rd_start;
+          elsif reject_data_i = '1' then
+            s_fcode       <= C_RESET_FIFO;
+            st_readout    <= Rst_fifo_start;
+          else
+            st_readout  <= Wait_for_accept;
+          end if;
+        
+        when Wait_to_read =>
+          if data_ready_i = '1' then
             st_readout    <= Analog_rd_start;
           end if;
         
+        when Wait_to_clear =>
+          if data_ready_i = '1' then
+            s_fcode       <= C_RESET_FIFO;
+            st_readout    <= Rst_fifo_start;
+          end if;
+        
+-------------------------------------------------------------------------------
+------ Analog read subFSM -----------------------------------------------------
+
         when Analog_rd_start =>
-          s_fcode         <= C_ANALOG_READ;
-          s_timeout_cnt   <= 253;
-          st_readout      <= Analog_rd_process;
+          s_fcode       <= C_ANALOG_READ;
+          s_timeout_cnt <= 253;
+          st_readout    <= Analog_rd_process;
         
         when Analog_rd_process =>
-          s_timeout_cnt    <= s_timeout_cnt - 1;
+          s_timeout_cnt <= s_timeout_cnt - 1;
           if s_sync_dil = '1' then
             s_fcode     <= C_RESET_CHAIN;
             st_readout  <= Rst_chain_start;
@@ -304,29 +500,45 @@ begin
 
         when Rst_chain_start =>
           s_fcode       <= C_RESET_CHAIN;
-          if s_rst_chain_cnt < 2 then
-            s_rst_chain_cnt <= s_rst_chain_cnt + 1;
+          if s_rst_cnt < 2 then
+            s_rst_cnt   <= s_rst_cnt + 1;
           else
-            st_readout    <= Rst_chain_end;
+            st_readout  <= Rst_chain_end;
           end if;
         
         when Rst_chain_end =>
           st_readout    <= Idle;
         
 -------------------------------------------------------------------------------
+------ Reset FIFO pointer subFSM ----------------------------------------------
+
+        when Rst_fifo_start =>
+          s_fcode       <= C_RESET_FIFO;
+          if s_rst_cnt < 2 then
+            s_rst_cnt   <= s_rst_cnt + 1;
+          else
+            st_readout  <= Rst_fifo_end;
+          end if;
+        
+        when Rst_fifo_end =>
+          s_fcode     <= C_RESET_CHAIN;
+          st_readout  <= Rst_chain_start;
+--          st_readout    <= Idle;
+        
+-------------------------------------------------------------------------------
 ------ Configuration write subFSM ---------------------------------------------
 
         when Conf_wr_start =>
-          s_fcode         <= C_CONFIG_WRITE;
-          s_timeout_cnt   <= 320;
-          st_readout      <= Conf_wr_process;
+          s_fcode       <= C_CONFIG_WRITE;
+          s_timeout_cnt <= 320;
+          st_readout    <= Conf_wr_process;
         
         when Conf_wr_process =>
-          s_timeout_cnt    <= s_timeout_cnt - 1;
+          s_timeout_cnt <= s_timeout_cnt - 1;
           if s_channel < 64*5 - 1 then
-            s_channel     <= s_channel + 1;
+            s_channel   <= s_channel + 1;
           else
-            s_channel     <= (others => '0');
+            s_channel   <= (others => '0');
           end if;
           if s_sync_dil = '1' then
             s_fcode     <= C_RESET_CHAIN;
@@ -337,15 +549,15 @@ begin
 ------ Configuration read subFSM ----------------------------------------------
 
         when Conf_rd_start =>
-          s_fcode         <= C_CONFIG_READ;
-          s_timeout_cnt   <= 320;
-          st_readout      <= Conf_rd_process;
+          s_fcode       <= C_CONFIG_READ;
+          s_timeout_cnt <= 320;
+          st_readout    <= Conf_rd_process;
         
         when Conf_rd_process =>
-          s_timeout_cnt    <= s_timeout_cnt - 1;
+          s_timeout_cnt <= s_timeout_cnt - 1;
           if s_sync_dil = '1' then
-            s_fcode       <= C_RESET_CHAIN;
-            st_readout    <= Rst_chain_start;
+            s_fcode     <= C_RESET_CHAIN;
+            st_readout  <= Rst_chain_start;
           end if;
           
         when others =>

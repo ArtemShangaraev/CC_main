@@ -32,11 +32,11 @@ use IEEE.numeric_std.all;
 entity lvds_wrapper IS
   port (
     arst        : in  std_logic;
-    realign_i   : in  std_logic;
     lvds_data_i : in  std_logic_vector (0 downto 0);  -- serial in
-    lvds_clk_i  : in  std_logic;                      -- 200M in clk
+    lvds_clk_i  : in  std_logic;                      -- 160M in clk
     lvds_data_o : out std_logic_vector (3 downto 0);  -- parallel out
-    lvds_clk_o  : out std_logic                       -- 50M out clk
+    lvds_clk_o  : out std_logic;                      -- 40M out clk
+    aligned_o   : out std_logic                       -- LVDS status
   );
 end entity;
 
@@ -70,7 +70,10 @@ architecture beh of lvds_wrapper  is
     Wait1,
     Wait2,
     Wait3,
-    Ready
+    Ready,
+    Realign1,
+    Realign2,
+    Realign3
   );
   signal BS :t_bitslip_lvds := Reset;
 
@@ -90,6 +93,7 @@ begin
 
   s_pll_arst <= arst;
   lvds_clk_o <= s_lvds_clk;
+  aligned_o   <= '1' when BS <= Ready else '0';
 
   RX_LVDS : LVDS_RX 
   port map (
@@ -140,8 +144,28 @@ begin
         when Wait3 =>
           BS <= Check1;      -- Data available on the 3rd parallel cycle
         when Ready =>
-          if realign_i = '1' then
+          if s_lvds_word = x"F" then
+            BS <= Realign1;
+          else
+            BS <= Ready;
+          end if;
+        when Realign1 =>
+          if s_lvds_word = x"F" then
+            BS <= Realign2;
+          else
+            BS <= Ready;
+          end if;
+        when Realign2 =>
+          if s_lvds_word = x"F" then
+            BS <= Realign3;
+          else
+            BS <= Ready;
+          end if;
+        when Realign3 =>
+          if s_lvds_word = x"F" then
             BS <= Reset;
+          else
+            BS <= Ready;
           end if;
         when others => 
           null;
@@ -159,7 +183,10 @@ begin
     if arst = '1' then
       s_lvds_reg <= x"0";
     elsif rising_edge(s_lvds_clk) then
-      if BS = Ready then
+      if BS = Ready or 
+         BS = Realign1 or
+         BS = Realign2 or
+         BS = Realign3 then
         s_lvds_reg <= s_lvds_word;
       else
         s_lvds_reg <= x"0";

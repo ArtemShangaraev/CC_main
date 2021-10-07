@@ -24,6 +24,8 @@
 --  2020-02-20    1.2       ashangar  Removed XCVR RX.
 --                                    Reset and reconfiguration replaced by
 --                                    native Intel IP cores.
+--  2020-07-20    1.3       ashangar  Idle word and control bits changed to
+--                                    provide 4-bytes alignment.
 -------------------------------------------------------------------------------
 
 Library IEEE;
@@ -192,9 +194,11 @@ begin
 
   XCVR_TX_parallel_clk_o  <= s_tx_std_clk; 
 
-  s_tx_datak <= "0101" when XCVR_TX_parallel_data_i = X"C5BCC5BC" else "0000" ;
+  s_tx_datak <= "0001" when XCVR_TX_parallel_data_i = X"C5C5C5BC" else "0000" ;
 
   -- s_tx_datak is data/control indicator of the byte sent. 
   -- "0" means data; "1" means control.
+  -- x"C5BCC5BC" and "0101" for 2-bytes alignment
+  -- x"C5C5C5BC" and "0001" for 4-bytes alignment
 
 end architecture;

@@ -3,7 +3,7 @@
 -- Project    : Column Controller CPV
 -------------------------------------------------------------------------------
 -- File       : clock_generator.vhd
--- Author     : Artem Shangaraev  <artem.shangaraev@cern.ch>
+-- Author     : Artem Shangaraev <artem.shangaraev@cern.ch>
 -- Company    : CERN
 -- Created    : 2020-02-14
 -- Last update: 2020-02-14
@@ -15,10 +15,6 @@
 -------------------------------------------------------------------------------
 -- Copyright (c) 2020 CERN
 -------------------------------------------------------------------------------
--- Revisions  :
--- Date         Version   Author    Description
--- 2020-02-14   1.0       ashangar  Created
--------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -26,10 +22,11 @@ use IEEE.numeric_std.all;
 
 entity clock_generator is
   port (
-    EXT_RST_i : in  std_logic;
-    RST_o     : out std_logic;
-    CLK_i     : in  std_logic;
-    CLK_o     : out std_logic
+    EXT_RST_i   : in  std_logic;
+    RST_o       : out std_logic;
+    CLK_LOCAL_i : in  std_logic;    -- 50 MHz onboard
+    CLK_i       : in  std_logic;    -- 40 MHz external LVDS
+    CLK_o       : out std_logic
   );
 end entity;
 
@@ -42,10 +39,10 @@ architecture rtl of clock_generator is
 
   component main_pll is
     port (
-      refclk   : in  std_logic;
-      rst      : in  std_logic;
-      outclk_0 : out std_logic;
-      locked   : out std_logic
+      refclk    : in  std_logic;
+      rst       : in  std_logic;
+      outclk_0  : out std_logic;
+      locked    : out std_logic
   );
   end component main_pll;
 
@@ -66,19 +63,15 @@ begin
 
   RST_o <= s_rst;
 
-  PWRUP_RST: process(CLK_i)
+  PWRUP_RST: process(CLK_LOCAL_i)
   begin
-    if rising_edge(CLK_i) then
-      if s_pll_locked = '1' then
-        if s_pwrup_cnt < x"F" then
-          s_pwrup_cnt <= s_pwrup_cnt + 1;
-          s_rst       <= '1';
-        else
-          s_rst       <= '0';
-        end if;
+    if rising_edge(CLK_LOCAL_i) then
+      if s_pwrup_cnt < x"F" then
+        s_pwrup_cnt <= s_pwrup_cnt + 1;
+        s_rst       <= '1';
       else
-        s_pwrup_cnt   <= x"0";
-        s_rst         <= '1';
+        s_pwrup_cnt <= x"F";
+        s_rst       <= '0';
       end if;
     end if;
   end process;
@@ -88,9 +81,9 @@ begin
 
   INST_MAIN_PLL : main_pll
     port map(
-      refclk    => CLK_i,   -- clock from external oscillator
+      refclk    => CLK_LOCAL_i,   -- source clock
       rst       => EXT_RST_i,
-      outclk_0  => CLK_o,           -- 10 MHz
+      outclk_0  => CLK_o,         -- output 8 MHz
       locked    => s_pll_locked
     );
 
